@@ -1,0 +1,229 @@
+
+------------------------------------------------
+Uc1 Create a data base named AddressBookService|
+------------------------------------------------
+
+mysql> create database AddressBookService;
+Query OK, 1 row affected (0.23 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| AddressBookService |
+| TestDB             |
+| aqeeb              |
+| aqeeb2             |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+8 rows in set (0.00 sec)
+mysql> use AddressBookService;
+Database changed
+
+
+
+
+
+---------------------------------------------------------------------
+Uc2 Create a table called addressbook in AddressBookService database|
+---------------------------------------------------------------------
+
+mysql> create table addressbook(serial_no int,name varchar(30),address varchar(30),city varchar(30),state varchar(30),mobile varchar(30),zip int);
+Query OK, 0 rows affected (0.87 sec)
+
+mysql> select * from addressbook;
+Empty set (0.00 sec)
+
+
+
+
+
+------------------------------
+Uc3 Inserting values in table|
+------------------------------
+
+mysql> insert into addressbook values(1,"aqeeb","rahim nagar","bijapur","karnataka","980980",78978);
+Query OK, 1 row affected (0.18 sec)
+
+mysql> select * from addressbook;
++-----------+-------+-------------+---------+-----------+--------+-------+
+| serial_no | name  | address     | city    | state     | mobile | zip   |
++-----------+-------+-------------+---------+-----------+--------+-------+
+|         1 | aqeeb | rahim nagar | bijapur | karnataka | 980980 | 78978 |
++-----------+-------+-------------+---------+-----------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> insert into addressbook values(2,"fatha","jmk","bijapur","karnataka","7879",87987897);
+Query OK, 1 row affected (0.47 sec)
+
+mysql> select * from addressbook;
++-----------+-------+-------------+---------+-----------+--------+----------+
+| serial_no | name  | address     | city    | state     | mobile | zip      |
++-----------+-------+-------------+---------+-----------+--------+----------+
+|         1 | aqeeb | rahim nagar | bijapur | karnataka | 980980 |    78978 |
+|         2 | fatha | jmk         | bijapur | karnataka | 7879   | 87987897 |
++-----------+-------+-------------+---------+-----------+--------+----------+
+2 rows in set (0.00 sec)
+
+mysql> insert into addressbook values(3,"akash","chand colony","vijaypur","karnataka","8798",87897398);
+Query OK, 1 row affected (0.19 sec)
+
+mysql> select * from addressbook;
++-----------+-------+--------------+----------+-----------+--------+----------+
+| serial_no | name  | address      | city     | state     | mobile | zip      |
++-----------+-------+--------------+----------+-----------+--------+----------+
+|         1 | aqeeb | rahim nagar  | bijapur  | karnataka | 980980 |    78978 |
+|         2 | fatha | jmk          | bijapur  | karnataka | 7879   | 87987897 |
+|         3 | akash | chand colony | vijaypur | karnataka | 8798   | 87897398 |
++-----------+-------+--------------+----------+-----------+--------+----------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+-----------------------------------
+Uc4 Updating address by first name|
+-----------------------------------
+
+mysql> update addressbook set name = "ank" where serial_no = 1;
+Query OK, 1 row affected (0.20 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+-------+--------------+----------+-----------+--------+----------+
+| serial_no | name  | address      | city     | state     | mobile | zip      |
++-----------+-------+--------------+----------+-----------+--------+----------+
+|         1 | ank   | rahim nagar  | bijapur  | karnataka | 980980 |    78978 |
+|         2 | fatha | jmk          | bijapur  | karnataka | 7879   | 87987897 |
+|         3 | akash | chand colony | vijaypur | karnataka | 8798   | 87897398 |
++-----------+-------+--------------+----------+-----------+--------+----------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+---------------------------------------------------------
+Uc5 Delete contact from address book by using first name|
+---------------------------------------------------------
+
+mysql> delete from addressbook where name = "ank";
+Query OK, 1 row affected (0.23 sec)
+
+mysql> select * from addressbook;
++-----------+-------+--------------+----------+-----------+--------+----------+
+| serial_no | name  | address      | city     | state     | mobile | zip      |
++-----------+-------+--------------+----------+-----------+--------+----------+
+|         2 | fatha | jmk          | bijapur  | karnataka | 7879   | 87987897 |
+|         3 | akash | chand colony | vijaypur | karnataka | 8798   | 87897398 |
++-----------+-------+--------------+----------+-----------+--------+----------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+-------------------------------------------
+Uc6 count of address book by City or State|
+-------------------------------------------
+
+mysql> select count(city) from addressbook where state = "karnataka";
++-------------+
+| count(city) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.08 sec)
+
+
+
+
+--------------------------------------------------------------------------------------------------
+Uc7 Sorting alphabetically address book by first name for given city| Both Asending and Desending|
+--------------------------------------------------------------------------------------------------
+
+mysql> select * from addressbook order by city;
++-----------+-------+--------------+----------+-----------+--------+----------+
+| serial_no | name  | address      | city     | state     | mobile | zip      |
++-----------+-------+--------------+----------+-----------+--------+----------+
+|         2 | fatha | jmk          | bijapur  | karnataka | 7879   | 87987897 |
+|         3 | akash | chand colony | vijaypur | karnataka | 8798   | 87897398 |
++-----------+-------+--------------+----------+-----------+--------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from addressbook order by city DESC;
++-----------+-------+--------------+----------+-----------+--------+----------+
+| serial_no | name  | address      | city     | state     | mobile | zip      |
++-----------+-------+--------------+----------+-----------+--------+----------+
+|         3 | akash | chand colony | vijaypur | karnataka | 8798   | 87897398 |
+|         2 | fatha | jmk          | bijapur  | karnataka | 7879   | 87987897 |
++-----------+-------+--------------+----------+-----------+--------+----------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+---------------------------------------------------
+Uc8  Identify each address book with name and type|
+---------------------------------------------------
+
+mysql> select * from addressbook where type = "self";
++-----------+-------+-------------+---------+-------------+--------+---------+------+
+| serial_no | name  | address     | city    | state       | mobile | zip     | type |
++-----------+-------+-------------+---------+-------------+--------+---------+------+
+|         1 | aqeeb | rahim nagar | Belgaum | maharashtra | 787897 | 7879789 | self |
++-----------+-------+-------------+---------+-------------+--------+---------+------+
+1 row in set (0.01 sec)
+
+mysql> select * from addressbook where name = "fatha";
++-----------+-------+---------+---------+-----------+--------+----------+------+
+| serial_no | name  | address | city    | state     | mobile | zip      | type |
++-----------+-------+---------+---------+-----------+--------+----------+------+
+|         2 | fatha | jmk     | bijapur | karnataka | 7879   | 87987897 | Bro  |
++-----------+-------+---------+---------+-----------+--------+----------+------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+------------------------------------------------------------
+Uc9 Ability to get number of contact persons i.e. count by type|
+------------------------------------------------------------
+
+mysql> select count(type) from addressbook where type = "Bro";
++-------------+
+| count(type) |
++-------------+
+|           1 |
++-------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
